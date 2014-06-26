@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Supplier Details</h2>
 
 <div>
-    <h4>Supplier</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -104,3 +103,36 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.SupplierID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+<h3>Supplied Products</h3>
+<table class="table">
+    @{var dummy = Model.Products.FirstOrDefault(); }
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => dummy.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => dummy.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => dummy.UnitPrice)
+        </th>
+    </tr>
+
+@foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(Html.DisplayFor(modelItem => item.ProductName).ToHtmlString(),
+                    "Details", "Products", new { id = item.ProductID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+        </tr>
+    }
+</table>
