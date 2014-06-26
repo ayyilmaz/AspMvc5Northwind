@@ -86,7 +86,8 @@
             @Html.DisplayFor(modelItem => item.Category.CategoryName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
+            @Html.ActionLink(Html.DisplayFor(modelItem => item.Supplier.CompanyName).ToHtmlString(), 
+                "Details", "Suppliers", new { id = item.Supplier.SupplierID }, null)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
