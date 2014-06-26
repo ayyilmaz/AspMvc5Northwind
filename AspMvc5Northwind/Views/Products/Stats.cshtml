@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AspMvc5Northwind.ViewModels.ProductCategoryGroup>
+
+@{
+    ViewBag.Title = "Product stats";
+}
+
+<h2>Product Stats</h2>
+
+<h3>Product counts by category</h3>
+<table class="table">
+    <tr>
+        <th>
+            Category
+        </th>
+        <th>
+            Number of Products
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCount)
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Back to Products", "Index")

@@ -1,0 +1,105 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<AspMvc5Northwind.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<h4>
+    @Html.ActionLink("Product stats", "Stats")
+</h4>
+
+@*Force the form to use HTTP GET since it doesn't modify the data (w3c guideline)*@
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+{
+    <p>
+        Find by product name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    @{var dummy = Model.FirstOrDefault(); }
+    <tr>
+        <th>
+            @Html.ActionLink(Html.DisplayNameFor(model => dummy.ProductName).ToHtmlString(), "Index",
+                         new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => dummy.QuantityPerUnit)
+        </th>
+        <th>
+            @Html.ActionLink(Html.DisplayNameFor(model => dummy.UnitPrice).ToHtmlString(), "Index",
+                         new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => dummy.UnitsInStock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => dummy.UnitsOnOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => dummy.ReorderLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => dummy.Discontinued)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => dummy.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => dummy.Supplier.CompanyName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitsInStock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReorderLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discontinued)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", 
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
