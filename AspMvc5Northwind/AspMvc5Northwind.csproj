@@ -173,6 +173,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>NorthwindModel.tt</DependentUpon>
@@ -188,6 +190,8 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Metadata.cs" />
+    <Compile Include="Models\NorthwindInterceptorLogging.cs" />
+    <Compile Include="Models\NorthwindInterceptorTransientErrors.cs" />
     <Compile Include="Models\NorthwindModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

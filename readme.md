@@ -12,7 +12,7 @@ in this directory.
 
 
 Getting started
-===============
+---------------
 
 To build and run this project, do the following:
 
@@ -26,7 +26,7 @@ To build and run this project, do the following:
 
 
 Rough steps to recreate this project
-====================================
+------------------------------------
 
 If for some reason you want to create this project from scratch (rather than
 using the included source files), do the following:
@@ -40,6 +40,7 @@ using the included source files), do the following:
 
 
 TODO
-====
+----
 
+- Test the 'getting started' method above
 - Put on github
