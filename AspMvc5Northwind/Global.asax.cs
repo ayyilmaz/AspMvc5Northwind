@@ -22,7 +22,7 @@ namespace AspMvc5Northwind
 
             // Uncomment the following line to throw fake SQL errors when 
             // the search term "Throw" is entered.
-             DbInterception.Add(new NorthwindInterceptorTransientErrors());
+            // DbInterception.Add(new NorthwindInterceptorTransientErrors());
         }
     }
 }
