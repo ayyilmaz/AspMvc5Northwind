@@ -190,6 +190,7 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Metadata.cs" />
+    <Compile Include="Models\NorthwindConfiguration.cs" />
     <Compile Include="Models\NorthwindInterceptorLogging.cs" />
     <Compile Include="Models\NorthwindInterceptorTransientErrors.cs" />
     <Compile Include="Models\NorthwindModel.Context.cs">

@@ -39,6 +39,23 @@ using the included source files), do the following:
   then have to modify the generated code to match changes that I've made...
 
 
+More info about this project
+----------------------------
+
+So far I've just been working through [this tutorial](http://www.asp.net/mvc/tutorials/getting-started-with-ef-using-mvc)
+to develop the project. The tutorial uses code-first development, whereas I'm using
+database-first.
+
+ASP.NET / MVC / EF6 features used in this project:
+
+- Enhancing a generated data model using data annotations attributes,
+  enabling better front-end input data validation
+- Performing basic CRUD operations
+- Filtering, ordering, searching, paging
+- Working with related data
+- Implementing connection resiliency
+- Using command interception
+
 TODO
 ----
 

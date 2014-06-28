@@ -43,14 +43,14 @@ namespace AspMvc5Northwind.Controllers
             // Get products to show based on input parameters
             // Lazy load: get products, later queries can get related data
             // This results in a database query per product listed in the view
-            var products = from p in db.Products select p;
+            //var products = from p in db.Products select p;
 
             // Eager load: load products and related data in one go
             // Results in 2 queries (why not one?), regardless of the number of 
             // products listed in the view.
-            //var products = db.Products
-            //    .Include(p => p.Supplier)
-            //    .Include(p => p.Category);
+            var products = db.Products
+                .Include(p => p.Supplier)
+                .Include(p => p.Category);
 
             if (!String.IsNullOrEmpty(searchString))
             {
