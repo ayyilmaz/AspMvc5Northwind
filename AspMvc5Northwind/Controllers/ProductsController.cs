@@ -95,8 +95,8 @@ namespace AspMvc5Northwind.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName");
+            PopulateCategoryDropDownList();
+            PopulateSupplierDropDownList();
             return View();
         }
 
@@ -114,8 +114,8 @@ namespace AspMvc5Northwind.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", product.SupplierID);
+            PopulateCategoryDropDownList(product.CategoryID);
+            PopulateSupplierDropDownList(product.SupplierID);
             return View(product);
         }
 
@@ -131,8 +131,8 @@ namespace AspMvc5Northwind.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", product.SupplierID);
+            PopulateCategoryDropDownList(product.CategoryID);
+            PopulateSupplierDropDownList(product.SupplierID);
             return View(product);
         }
 
@@ -149,8 +149,8 @@ namespace AspMvc5Northwind.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", product.SupplierID);
+            PopulateCategoryDropDownList(product.CategoryID);
+            PopulateSupplierDropDownList(product.SupplierID);
             return View(product);
         }
 
@@ -203,6 +203,26 @@ namespace AspMvc5Northwind.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        // -----------------------------------------------------------------------------
+        // private parts
+
+        private void PopulateCategoryDropDownList(object selectedCategory = null)
+        {
+            var categories = from c in db.Categories
+                             orderby c.CategoryName
+                             select c;
+            ViewBag.CategoryID = new SelectList(categories, "CategoryID", "CategoryName", selectedCategory);
+        }
+
+        private void PopulateSupplierDropDownList(object selectedSupplier = null)
+        {
+            var suppliers = from s in db.Suppliers
+                            orderby s.CompanyName
+                            select s;
+            ViewBag.SupplierID = new SelectList(suppliers, "SupplierID", "CompanyName", selectedSupplier);
         }
     }
 }
