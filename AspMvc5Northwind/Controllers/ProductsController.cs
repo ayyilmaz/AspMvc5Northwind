@@ -171,6 +171,8 @@ namespace AspMvc5Northwind.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Products/Stats
+        // uses the ProductCategoryGroup ViewModel to represent product data 
         public ActionResult Stats(int? id)
         {
             var categories = from product in db.Products

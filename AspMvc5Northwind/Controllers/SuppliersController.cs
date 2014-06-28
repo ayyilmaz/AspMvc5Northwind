@@ -27,7 +27,11 @@ namespace AspMvc5Northwind.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Supplier supplier = db.Suppliers.Find(id);
+            // Eagerly load products, since we want to display them all (saves multiple
+            // SQL queries). See http://www.asp.net/mvc/tutorials/getting-started-with-ef-using-mvc/reading-related-data-with-the-entity-framework-in-an-asp-net-mvc-application
+            Supplier supplier = db.Suppliers
+                .Include(p => p.Products)
+                .SingleOrDefault(p => p.SupplierID == id);
             if (supplier == null)
             {
                 return HttpNotFound();
